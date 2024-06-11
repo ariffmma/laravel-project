@@ -18,6 +18,7 @@ class Siswa extends Model
         'jurusan',
         'kelas',
         'angkatan',
+        'foto',
     ];
     protected $searchable = [
         'columns' => [

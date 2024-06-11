@@ -48,9 +48,27 @@ class SiswaController extends Controller
         return view('operator.siswa_form', $data);
     }
 
-    public function store(StoreSiswaRequest $request)
+    public function store(Request $request)
     {
-        //
+        $requestData = $request->validate([
+            'wali_id' => 'nullable',
+            'nama' => 'required',
+            'nisn' => 'required|unique:siswas',
+            'jurusan' => 'required',
+            'kelas' => 'required',
+            'angkatan' => 'required',
+            'foto' => 'nullable|image|mimes:jpeg,png,jpg|max:5000'
+        ]);
+        if ($request->hasFile('foto')){
+            $requestData['foto'] = $request->file('foto')->store('public/foto_siswa');
+        }
+        if ($request->filled('wali_id')) {
+            $requestData['wali_status'] = 'ok';
+        }
+        $requestData['user_id'] = auth()->user()->id;
+        Model::create($requestData);
+        flash('Data siswa berhasil disimpan');
+        return back();
     }
 
     public function show(Siswa $siswa)
