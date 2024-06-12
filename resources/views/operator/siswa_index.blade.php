@@ -31,7 +31,7 @@
                             @forelse ($models as $item)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $item->wali_status }}</td>
+                                    <td>{{ $item->wali->name  ?? 'Belum ada wali murid' }}</td>
                                     <td>{{ $item->nama }}</td>
                                     <td>{{ $item->nisn }}</td>
                                     <td>{{ $item->jurusan }}</td>

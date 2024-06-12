@@ -28,4 +28,7 @@ class Siswa extends Model
         ],
     ];
 
+    public function wali(){
+        return $this->belongsTo(User::class);
+    }
 }
